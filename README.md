@@ -4,7 +4,7 @@
 
 ### run on docker
 * build image and run containers
-```sh
+```docker
 docker-compose -f docker-compose.dev.yml up
 ```
 
