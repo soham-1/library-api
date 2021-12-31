@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+    api:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      image: libraryapi_image
+      container_name: "libraryapi-container"
+      volumes:
+        - ./src/:/code/src/
+      environment:
+        - FLASK_APP=src
+        - FLASK_ENV=development
+      ports:
+        - "5000:5000"

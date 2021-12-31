@@ -1,0 +1,197 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "description": "list of all functionalities provided for library management system",
+      "version": "1.0.0",
+      "title": "Library API"
+    },
+    "components": {
+      "schemas": {
+          "Book": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "author": {
+                  "type": "string"
+                }
+              }
+          }
+      }
+    },
+    "paths": {
+      "/books": {
+        "get" :{
+          "tags": [
+              "books"
+          ],
+          "summary": "Get All books",
+          "parameters": [{
+            "name": "name",
+            "in": "query",
+            "description": "filter books by name",
+            "required": false,
+            "type": "string"
+            
+            },
+            {
+              "name": "author",
+              "in": "query",
+              "description": "filter books by author",
+              "required": false,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/components/schemas/Book"
+                }
+            }
+          }
+        }
+      },
+      "/books/id/{id}": {
+        "get": {
+          "tags": [
+            "books"
+          ],
+          "summary": "Get book by id",
+          "parameters": [
+            {
+              "name": "id", 
+              "type": "integer",
+              "description": "unique id of book",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/components/schemas/Book"
+              }
+            },
+            "404": {
+              "description": "Not Found"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+              "books"
+          ],
+          "summary": "Add Book",
+          "requestBody": {
+          "description": "Post New Book To Database",
+          "required": true,
+          "content": {
+              "application/json": {
+              "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+              }
+          }
+          },
+          "parameters": [
+            {
+              "name": "id", 
+              "type": "integer",
+              "description": "unique id of book",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+              },
+              "403": {
+                  "description": "Forbidden - book with given id already exists",
+                  "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+          }
+          }
+        },
+        "put": {
+          "tags": [
+              "books"
+          ],
+          "summary": "Add or Update a Book",
+          "requestBody": {
+          "description": "Add or Update a Book To Database",
+          "required": true,
+          "content": {
+              "application/json": {
+              "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+              }
+          }
+          },
+          "parameters": [
+            {
+              "name": "id", 
+              "type": "integer",
+              "description": "unique id of book",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+              },
+              "404": {
+                  "description": "NOT FOUND",
+                  "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+          }
+          }
+        },
+        "delete": {
+          "tags": [
+              "books"
+          ],
+          "summary": "Add Book",
+          "parameters": [
+            {
+              "name": "id", 
+              "type": "integer",
+              "description": "unique id of book",
+              "in": "path",
+              "required": true
+            }
+          ],
+          "responses": {
+              "200": {
+                  "description": "OK",
+                  "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+              },
+              "404": {
+                  "description": "NOT FOUND",
+                  "schema": {
+                  "$ref": "#/components/schemas/Book"
+                  }
+          }
+        }
+      }
+    }
+  }
+}
