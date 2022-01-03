@@ -36,4 +36,7 @@ def create_app():
     with app.app_context():
         db.create_all()
 
+    from .views import session_views
+    app.register_blueprint(session_views.session_bp)
+
     return app
